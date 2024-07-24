@@ -1,0 +1,49 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+
+//  基本設定
+*,
+*::before, 
+*::after {
+  margin: 0;
+  padding: 0;       
+  box-sizing: border-box;
+}
+
+img {
+  display: block;//バーティカルアラインのベースラインを適応しないため
+  max-width: 100%; //レスポンシブ対応するようになる
+}
+
+html {
+  font-size: .825rem; //16px × 0.825 = 14px(13.2px)
+}
+
+body {//meinnビジュアル潜り潜り込まないように
+  padding: 60px;//必要になるのはSPの時だけ、なのでここでメディアクエリ
+
+  @include mq {
+    padding-top: 0;
+}
+}
+
+//ヘッダー　mobail ファースト
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  background-color:yellow;
+  z-index: 100;
+
+  &__nav-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    left: 0%;
+    top: 0;
+}
+}
