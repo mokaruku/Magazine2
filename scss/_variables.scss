@@ -2,3 +2,9 @@ $breakpoints: (
   md: 768px,
   lg: 992px,
 );
+
+:root {
+  --color-primary: #000;
+  --easing: cubic-bezier(.73, .03, .11, .99);
+  --font-base: "Radio Canada", "Noto Sans JP", sans-serif;
+}

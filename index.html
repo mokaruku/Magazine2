@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,20 +11,20 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap"
     rel="stylesheet">
-
   <link rel="stylesheet" href="css/style.min.css">
 </head>
-
 <body>
-
-  <header>
-    <h1>
+  <header class="header">
+    <h1 class="header__logo">
       <a href="#">
         <img src="img/header-logo.svg" alt="&amp; Premium.jp">
       </a>
     </h1>
-    <div>
-      <nav>
+    <button class="header__nav-toggle">
+      <span></span>
+    </button>
+    <div class="header__nav-container">
+      <nav class="header__nav">
         <ul>
           <li><a href="#">magazine</a></li>
           <li><a href="#">lifestyle</a></li>
@@ -36,7 +35,7 @@
           <li><a href="#">column</a></li>
         </ul>
       </nav>
-      <ul>
+      <ul class="header__sns">
         <li>
           <a href="https://www.facebook.com/AndPremium2013/" target="_blank">
             <img src="img/ico-facebook-fill.svg" alt="">
@@ -51,67 +50,72 @@
       </ul>
     </div>
   </header>
+
   <main>
-    <section>
-      <img src="img/new-issue@2x.png" alt="">
-      <div>
+    <section class="mv">
+      <img src="img/new-issue@2x.png" alt="" class="mv__new-issue">
+      <div class="mv__title">
         <h2>
-          <span>2022 JUN. &amp;Premium No. 102</span>
-          <span>Life with Flowers &amp; Greens</span>
-          <span>花を飾る、緑と暮らす。</span>
+          <span class="mv__title-date-number">2022 JUN. &amp;Premium No. 102</span>
+          <span class="mv__title-en">Life with Flowers &amp; Greens</span>
+          <span class="mv__title-ja">花を飾る、緑と暮らす。</span>
         </h2>
       </div>
     </section>
-
-
-    <section>
-      <h2>
+    <section class="backnumbers">
+      <h2 class="backnumbers__heading">
         <span>Backnumbers</span>
         <span>バックナンバー</span>
       </h2>
-      <ul>
+      <ul class="backnumbers__list">
         <li>
+        <li style="background-color: #ecf4f9;">
           <a href="#">
-            <img src="img/101.jpg" alt="">
-            <p>Mar. 20, 2022</p>
-            <p>&amp;Premium No. 101</p>
-            <p>IN GOOD TASTE ／ センスがいいって、どういうことですか?</p>
+            <img src="img/101.jpg" alt="" class="backnumbers__cover">
+            <p class="backnumbers__date">Mar. 20, 2022</p>
+            <p class="backnumbers__number">&amp;Premium No. 101</p>
+            <p class="backnumbers__title">IN GOOD TASTE ／ センスがいいって、どういうことですか?</p>
           </a>
         </li>
         <li><a href="#">
-            <img src="img/100.jpg" alt="">
-            <p>Feb. 19, 2022</p>
-            <p>&amp;Premium No. 100</p>
-            <p>Kissaten 100 ／ 喫茶店、100のこと</p>
+        <li style="background-color: #fbf3d2;"><a href="#">
+            <img src="img/100.jpg" alt="" class="backnumbers__cover">
+            <p class="backnumbers__date">Feb. 19, 2022</p>
+            <p class="backnumbers__number">&amp;Premium No. 100</p>
+            <p class="backnumbers__title">Kissaten 100 ／ 喫茶店、100のこと</p>
           </a></li>
         <li><a href="#">
-            <img src="img/99.jpg" alt="">
-            <p>Jun. 20, 2022</p>
-            <p>&amp;Premium No. 99</p>
-            <p>COZY ROOMS ／ 居心地のいい部屋に、整える。</p>
+        <li style="background-color: #f9f2eb;"><a href="#">
+            <img src="img/99.jpg" alt="" class="backnumbers__cover">
+            <p class="backnumbers__date">Jun. 20, 2022</p>
+            <p class="backnumbers__number">&amp;Premium No. 99</p>
+            <p class="backnumbers__title">COZY ROOMS ／ 居心地のいい部屋に、整える。</p>
           </a></li>
         <li><a href="#">
-            <img src="img/98.jpg" alt="">
-            <p>Dec. 20, 2021</p>
-            <p>&amp;Premium No. 98</p>
-            <p>SNACK TIME ／ やっぱり、おやつは大切。</p>
+        <li style="background-color: #fae8c2;"><a href="#">
+            <img src="img/98.jpg" alt="" class="backnumbers__cover">
+            <p class="backnumbers__date">Dec. 20, 2021</p>
+            <p class="backnumbers__number">&amp;Premium No. 98</p>
+            <p class="backnumbers__title">SNACK TIME ／ やっぱり、おやつは大切。</p>
           </a></li>
         <li><a href="#">
-            <img src="img/97.jpg" alt="">
-            <p>Nov. 19, 2021</p>
-            <p>&amp;Premium No. 97</p>
-            <p>PEACEFUL MOMENTS ／ 静かに過ごす時間が、必要です。</p>
+        <li style="background-color: #e2efe7;"><a href="#">
+            <img src="img/97.jpg" alt="" class="backnumbers__cover">
+            <p class="backnumbers__date">Nov. 19, 2021</p>
+            <p class="backnumbers__number">&amp;Premium No. 97</p>
+            <p class="backnumbers__title">PEACEFUL MOMENTS ／ 静かに過ごす時間が、必要です。</p>
           </a></li>
         <li><a href="#">
-            <img src="img/96.jpg" alt="">
-            <p>Oct. 20, 2021</p>
-            <p>&amp;Premium No. 96</p>
-            <p>TABLEWARE FOR LIFE ／ 器を知る、学ぶ、楽しむ。</p>
+        <li style="background-color: #f2f5fb;"><a href="#">
+            <img src="img/96.jpg" alt="" class="backnumbers__cover">
+            <p class="backnumbers__date">Oct. 20, 2021</p>
+            <p class="backnumbers__number">&amp;Premium No. 96</p>
+            <p class="backnumbers__title">TABLEWARE FOR LIFE ／ 器を知る、学ぶ、楽しむ。</p>
           </a></li>
       </ul>
     </section>
   </main>
 
+  <script src="js/script.js"></script>
 </body>
-
 </html>

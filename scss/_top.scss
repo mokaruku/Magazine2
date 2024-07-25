@@ -1,49 +1,175 @@
 @use './variables' as *;
 @use './mixins' as *;
-
-
-//  基本設定
+//最低限のリセット
 *,
-*::before, 
+*::before,
 *::after {
   margin: 0;
-  padding: 0;       
+  padding: 0;
   box-sizing: border-box;
 }
-
+//基本的なスタイル　いつもは顧問に、、、
 img {
   display: block;//バーティカルアラインのベースラインを適応しないため
-  max-width: 100%; //レスポンシブ対応するようになる
+  max-width: 100%;//レスポンシブ対応するようにする
 }
 
 html {
-  font-size: .825rem; //16px × 0.825 = 14px(13.2px)
+  font-size: .825rem; //13.2px　1rem = 13.2px
 }
 
-body {//meinnビジュアル潜り潜り込まないように
-  padding: 60px;//必要になるのはSPの時だけ、なのでここでメディアクエリ
+body {
+  padding-top: 60px; //メインビジュアル被らないように、潜り込まないように
+  font-family: var(--font-base);
 
-  @include mq {
+  @include mq {  //padding-top: 60pxが必要になるのはSPの時だけ。
     padding-top: 0;
-}
+  }
 }
 
-//ヘッダー　mobail ファースト
+// ====================
+
+// ヘッダー
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: fixed;//ヘッダー固定
   height: 60px;
+  left: 0;
+  top: 0;
   width: 100%;
-  background-color:yellow;
   z-index: 100;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;  //ヘッダー中央に
+  align-items: center;
+
+  &__logo {
+    width: 160px;
+  }
+
+  &__nav-toggle {
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    width: 60px;
+    height: 60px;
+    background-color: transparent; //透明にする
+    border: none;
+    
+  span,
+  &::before,
+  &::after {  //3本みんな中央に固まっている
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 32px;
+    left: 14px;
+    height: 1px;
+    background-color: var(--color-primary);
+    transition: .3s;
+  }
+
+  &::before {  //１本上にずらしていく
+    top: calc(50% - 8px);
+  }
+
+  &::after {
+    top: calc(50% + 8px);
+  }
+}
+
+body.open &__nav-toggle {
+  span {
+    transform: scaleX(0);  //spanに対してちじんで見えなくなる
+  }
+
+  &::before,
+  &::after {
+    top: 50%;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
 
   &__nav-container {
     position: fixed;
     width: 100%;
     height: 100%;
     background: #fff;
-    left: 0%;
+    left: 0;
     top: 0;
+    display: flex;  //センセンタリングする
+    flex-direction: column; //縦並びに
+    align-items: center; //真ん中にセンタリング
+    transform: translateX(100%);
+    transition: transform .8s var(--easing); //開閉の動き
+  }
+
+  body.open &__nav-container {
+    transform: translateX(0);  //コンテナーがボタンに反応するようになる
+  }
+
+    &__nav {
+      flex-grow: 2; //縦並びの割合を2にする
+      display: flex;  //ulの配置ができる
+      align-items: center; //真ん中に来る
+
+      ul {
+        list-style: none; //・マーク消す
+        text-align: center;  //文字全体中心
+      }
+
+      li {
+        margin-bottom: 2em;  //文字と文字の間隔
+
+        &:last-child {
+          margin-bottom: 0;  //最後の要素のマージンボトムなくなる
+        } 
+      }
+
+      li a {
+        text-decoration: none;  //アンダーラインなくす
+        color: var(--color-primary);
+      position: relative;
+      display: inline-block;  //パディング設定するため。線と文字の間隔が狭い
+      padding-bottom: 3px;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      }
+
+      li a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+       background-color: var(--color-primary);
+       transform: scaleX(0);  //0.3にすると軸を中心に伸びる
+       transform-origin: right center; //左側を左側を基準に左側を基準に伸びる状態にする
+       transition: transform .5s var(--easing);
+      }
+
+      li a:hover::after {
+        transform: scaleX(1);  //１に戻す
+        transform-origin: left center; //マウスオーバーした時だけ左側を基準に伸びる
+      }
+    }
+
+&__sns {
+  flex-grow: 1;//縦並びの割合を1にする
+  display: flex; //横並びにする
+  list-style: none;
+
+  li {
+    margin: 0 10px;  //左右に10px
+  }
 }
+
 }
