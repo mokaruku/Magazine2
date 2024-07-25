@@ -172,4 +172,53 @@ body.open &__nav-toggle {
   }
 }
 
+//デスクトップのスタイル
+@include mq {  
+  width: 200px;//ヘッダー左トップに固定
+  height: 100%; //100vh
+  flex-direction: column;
+  align-items: stretch;  //ヘッダーのアラインアイテムを変える
+  justify-content: flex-start;  
+
+  &__logo {
+    width: auto;  //autoに戻す
+    padding: 40px 20px 80px;
+  }
+
+  &__nav-toggle {
+    display: none;  // 最後の設定pcではbotann 表示しない
+  }
+
+  &__nav-container {
+    transform: none;//spでのtransform: :trasrateX(0);nの指定をなくす
+    position: static;
+    width: auto;
+      height: auto;
+      padding: 0 20px;
+      align-items: flex-start;
+      flex-grow: 1;
+  }
+
+  &__nav {
+    flex-grow: 0; //2だったものを0にする
+
+    ul {
+      text-align: start;
+    }
+
+    li {
+      margin-bottom: 1.5em;
+    }
+
+    li a {
+      font-size: 1rem;
+    }  
+  }
+  
+  &__sns {
+    flex-grow: 0;  //1だったものを0にする
+    margin-top: auto;
+    padding-bottom: 30px;
+  }
+}
 }
