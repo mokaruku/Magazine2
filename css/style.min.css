@@ -190,3 +190,98 @@ body.open .header__nav-container {
     padding-bottom: 30px;
   }
 }
+
+@media screen and (min-width: 768px) {
+  main {
+    margin-left: 200px;
+  }
+}
+
+.mv {
+  height: calc(100vh - 60px);
+  background: url(../img/mv-bg@2x.jpg) no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  filter: brightness(2) blur(5px);
+  transition: opacity 1s, filter 1.5s;
+}
+body.loaded .mv {
+  opacity: 1;
+  filter: brightness(1) blur(0px);
+}
+.mv__new-issue {
+  width: min(80%, 500px);
+}
+.mv__title {
+  position: absolute;
+  bottom: 50px;
+  left: 20px;
+}
+.mv__title h2 {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-gap: 10px;
+}
+.mv__title h2 > * {
+  background-color: #fff;
+  justify-self: start;
+}
+.mv__title-date-number, .mv__title-en, .mv__title-ja {
+  -webkit-clip-path: inset(0 100% 0 0);
+          clip-path: inset(0 100% 0 0);
+  transition: -webkit-clip-path 1s 1.8s var(--easing);
+  transition: clip-path 1s 1.8s var(--easing);
+  transition: clip-path 1s 1.8s var(--easing), -webkit-clip-path 1s 1.8s var(--easing);
+  overflow: hidden;
+}
+.mv__title-date-number > span, .mv__title-en > span, .mv__title-ja > span {
+  display: block;
+  transform: translateY(100%);
+  transition: transform 1s 3s var(--easing);
+}
+body.loaded .mv__title-date-number, body.loaded .mv__title-en, body.loaded .mv__title-ja {
+  -webkit-clip-path: inset(0 0 0 0);
+          clip-path: inset(0 0 0 0);
+}
+body.loaded .mv__title-date-number > span, body.loaded .mv__title-en > span, body.loaded .mv__title-ja > span {
+  transform: translateY(0);
+}
+.mv__title-date-number {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.mv__title-en, .mv__title-ja {
+  font-size: 2rem;
+  font-weight: 400;
+  font-feature-settings: "palt" 1;
+}
+.mv__title-ja {
+  letter-spacing: 0.04em;
+}
+@media screen and (min-width: 768px) {
+  .mv {
+    height: 100vh;
+  }
+  .mv__new-issue {
+    width: auto;
+    height: 85vh;
+  }
+  .mv__title-date-number {
+    font-size: 1.3rem;
+  }
+  .mv__title-en, .mv__title-ja {
+    font-size: clamp(2.5rem, 4vw, 3.4rem);
+  }
+}
+
+.backnumbers__heading {
+  background-color: #f8f8f8;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  padding: 2rem;
+}

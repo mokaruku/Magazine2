@@ -1,5 +1,6 @@
 @use './variables' as *;
 @use './mixins' as *;
+
 //最低限のリセット
 *,
 *::before,
@@ -8,10 +9,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 //基本的なスタイル　いつもは顧問に、、、
 img {
-  display: block;//バーティカルアラインのベースラインを適応しないため
-  max-width: 100%;//レスポンシブ対応するようにする
+  display: block; //バーティカルアラインのベースラインを適応しないため
+  max-width: 100%; //レスポンシブ対応するようにする
 }
 
 html {
@@ -22,7 +24,8 @@ body {
   padding-top: 60px; //メインビジュアル被らないように、潜り込まないように
   font-family: var(--font-base);
 
-  @include mq {  //padding-top: 60pxが必要になるのはSPの時だけ。
+  @include mq {
+    //padding-top: 60pxが必要になるのはSPの時だけ。
     padding-top: 0;
   }
 }
@@ -31,7 +34,7 @@ body {
 
 // ヘッダー
 .header {
-  position: fixed;//ヘッダー固定
+  position: fixed; //ヘッダー固定
   height: 60px;
   left: 0;
   top: 0;
@@ -39,7 +42,7 @@ body {
   z-index: 100;
   background-color: #fff;
   display: flex;
-  justify-content: center;  //ヘッダー中央に
+  justify-content: center; //ヘッダー中央に
   align-items: center;
 
   &__logo {
@@ -54,48 +57,50 @@ body {
     width: 60px;
     height: 60px;
     background-color: transparent; //透明にする
-    border: none;
-    
-  span,
-  &::before,
-  &::after {  //3本みんな中央に固まっている
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 32px;
-    left: 14px;
-    height: 1px;
-    background-color: var(--color-primary);
-    transition: .3s;
-  }
+    border: none;  //ボタンについてるボーダーなし
 
-  &::before {  //１本上にずらしていく
-    top: calc(50% - 8px);
-  }
+    span,
+    &::before,
+    &::after {  //3本まとめて作る
+      //3本みんな中央に固まっている
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 32px;
+      left: 14px;
+      height: 1px;
+      background-color: var(--color-primary);
+      transition: .3s;
+    }
 
-  &::after {
-    top: calc(50% + 8px);
-  }
-}
+    &::before {
+      //１本上にずらしていく
+      top: calc(50% - 8px); 
+    }
 
-body.open &__nav-toggle {
-  span {
-    transform: scaleX(0);  //spanに対してちじんで見えなくなる
-  }
+    &::after {
+      top: calc(50% + 8px);
+    }
+  }//この後ジャバスクリプトの設定
 
-  &::before,
-  &::after {
-    top: 50%;
-  }
+  body.open &__nav-toggle {
+    span {
+      transform: scaleX(0); //spanに対してちじんで見えなくなる
+    }    
 
-  &::before {
-    transform: rotate(45deg);
-  }
+    &::before,
+    &::after {
+      top: 50%;
+    }  //topの位置50に戻す
 
-  &::after {
-    transform: rotate(-45deg);
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
   }
-}
 
   &__nav-container {
     position: fixed;
@@ -104,121 +109,243 @@ body.open &__nav-toggle {
     background: #fff;
     left: 0;
     top: 0;
-    display: flex;  //センセンタリングする
-    flex-direction: column; //縦並びに
+    display: flex; //センセンタリングする
+    flex-direction: column; //横並びを縦並びに
     align-items: center; //真ん中にセンタリング
     transform: translateX(100%);
     transition: transform .8s var(--easing); //開閉の動き
   }
 
   body.open &__nav-container {
-    transform: translateX(0);  //コンテナーがボタンに反応するようになる
+    transform: translateX(0); //コンテナーがボタンに反応するようになる
   }
 
-    &__nav {
-      flex-grow: 2; //縦並びの割合を2にする
-      display: flex;  //ulの配置ができる
-      align-items: center; //真ん中に来る
+  &__nav {
+    flex-grow: 2; //縦並びの割合を2にする
+    display: flex; //ulの配置ができる
+    align-items: center; //真ん中に来る
 
-      ul {
-        list-style: none; //・マーク消す
-        text-align: center;  //文字全体中心
-      }
+    ul {
+      list-style: none; //・マーク消す
+      text-align: center; //文字全体中心
+    }
 
-      li {
-        margin-bottom: 2em;  //文字と文字の間隔
+    li {
+      margin-bottom: 2em; //文字と文字の間隔
 
-        &:last-child {
-          margin-bottom: 0;  //最後の要素のマージンボトムなくなる
-        } 
-      }
-
-      li a {
-        text-decoration: none;  //アンダーラインなくす
-        color: var(--color-primary);
-      position: relative;
-      display: inline-block;  //パディング設定するため。線と文字の間隔が狭い
-      padding-bottom: 3px;
-      text-transform: uppercase;
-      font-size: 1.2rem;
-      }
-
-      li a::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 1px;
-       background-color: var(--color-primary);
-       transform: scaleX(0);  //0.3にすると軸を中心に伸びる
-       transform-origin: right center; //左側を左側を基準に左側を基準に伸びる状態にする
-       transition: transform .5s var(--easing);
-      }
-
-      li a:hover::after {
-        transform: scaleX(1);  //１に戻す
-        transform-origin: left center; //マウスオーバーした時だけ左側を基準に伸びる
+      &:last-child {
+        margin-bottom: 0; //最後の要素のマージンボトムなくなる
       }
     }
 
-&__sns {
-  flex-grow: 1;//縦並びの割合を1にする
-  display: flex; //横並びにする
-  list-style: none;
+    li a {
+      text-decoration: none; //アンダーラインなくす
+      color: var(--color-primary);
+      position: relative;
+      display: inline-block; //パディング設定するため。線と文字の間隔が狭い
+      padding-bottom: 3px;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+    }
 
-  li {
-    margin: 0 10px;  //左右に10px
+    li a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-primary);
+      transform: scaleX(0); //0.3にすると軸を中心に伸びる
+      transform-origin: right center; //左側を左側を基準に左側を基準に伸びる状態にする
+      transition: transform .5s var(--easing);
+    }
+
+    li a:hover::after {
+      transform: scaleX(1); //１に戻す
+      transform-origin: left center; //マウスオーバーした時だけ左側を基準に伸びる
+    }
   }
-}
 
-//デスクトップのスタイル
-@include mq {  
-  width: 200px;//ヘッダー左トップに固定
-  height: 100%; //100vh
-  flex-direction: column;
-  align-items: stretch;  //ヘッダーのアラインアイテムを変える
-  justify-content: flex-start;  
+  &__sns {
+    flex-grow: 1; //縦並びの割合を1にする
+    display: flex; //横並びにする
+    list-style: none;
 
-  &__logo {
-    width: auto;  //autoに戻す
-    padding: 40px 20px 80px;
+    li {
+      margin: 0 10px; //左右に10px
+    }
   }
 
-  &__nav-toggle {
-    display: none;  // 最後の設定pcではbotann 表示しない
-  }
+  //デスクトップのスタイル
+  @include mq {
+    width: 200px; //ヘッダー左トップに固定
+    height: 100%; //100vh
+    flex-direction: column;
+    align-items: stretch; //ヘッダーのアラインアイテムを変える
+    justify-content: flex-start;
 
-  &__nav-container {
-    transform: none;//spでのtransform: :trasrateX(0);nの指定をなくす
-    position: static;
-    width: auto;
+    &__logo {
+      width: auto; //autoに戻す
+      padding: 40px 20px 80px;
+    }
+
+    &__nav-toggle {
+      display: none; // 最後の設定pcではbotann 表示しない
+    }
+
+    &__nav-container {
+      transform: none; //spでのtransform: :trasrateX(0);の指定をなくす
+      position: static;
+      width: auto;
       height: auto;
       padding: 0 20px;
       align-items: flex-start;
       flex-grow: 1;
-  }
-
-  &__nav {
-    flex-grow: 0; //2だったものを0にする
-
-    ul {
-      text-align: start;
     }
 
-    li {
-      margin-bottom: 1.5em;
+    &__nav {
+      flex-grow: 0; //2だったものを0にする
+
+      ul {
+        text-align: start;
+      }
+
+      li {
+        margin-bottom: 1.5em;
+      }
+
+      li a {
+        font-size: 1rem;
+      }
     }
 
-    li a {
-      font-size: 1rem;
-    }  
-  }
-  
-  &__sns {
-    flex-grow: 0;  //1だったものを0にする
-    margin-top: auto;
-    padding-bottom: 30px;
+    &__sns {
+      flex-grow: 0; //1だったものを0にする
+      margin-top: auto;
+      padding-bottom: 30px;
+    }
   }
 }
+
+// メイン
+main {
+  @include mq {     //メイン  spの時はいじらなくていいけどPCの時はいじらないと
+
+    margin-left: 200px;
+  }
+}
+
+// メインビジュアル
+.mv {
+  height: calc(100vh - 60px);
+  background: url(../img/mv-bg@2x.jpg) no-repeat center center;
+  background-size: cover;  //カバーにしておけば余りが出ない
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  filter: brightness(2) blur(5px);  //brightnessは明るさを変える
+  transition: opacity 1s, filter 1.5s;
+
+  body.loaded & {
+    opacity: 1;
+    filter: brightness(1) blur(0px);  //blurはぼかし
+  }
+  
+  &__new-issue {
+    // width: 80%;
+    // max-width: 500px;
+    width: min(80%, 500px);
+  }
+
+  &__title {
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
+  
+    h2 {
+      display: grid;
+      grid-template-rows: repeat(3, auto);//３行分のセルを作る
+      grid-gap: 10px;  //隙間作る
+}
+
+h2>* {   //ｈ２の子要素で何のタグでもという意味　ここで背景色カエル
+  background-color: #fff;
+  justify-self: start;  //文字の幅分だけ色を付ける
+  }
+}
+
+&__title-date-number,
+  &__title-en,
+  &__title-ja {  //3行分まとめて設定する
+    clip-path: inset(0 100% 0 0);  //上から時計回りに変を動かすことができる 完全に隠れた状態にする
+    transition: clip-path 1s 1.8s var(--easing);  //ウェードインしてちょっとワンタイミングおいてから発動。1.8は遅延秒数
+    overflow: hidden;  //はみ出た部分隠す
+
+    >span {
+      display: block;
+      transform: translateY(100%);
+      transition: transform 1s 3s var(--easing); //3sは3秒のは3秒のは3秒の
+    } 
+  }
+  body.loaded &__title-date-number,
+  body.loaded &__title-en,
+  body.loaded &__title-ja {
+    clip-path: inset(0 0 0 0);
+
+    >span {
+      transform: translateY(0);  //下に0ｐｘずれる　100％にすると完全に下に隠れる
+    }
+  }
+
+// 発行日＋No.
+&__title-date-number {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+&__title-en,
+&__title-ja {
+  font-size: 2rem;
+  font-weight: 400;
+  font-feature-settings: "palt" 1;  //字詰め文字間隔を変えるやくものも半角にする
+}
+
+&__title-ja {
+  letter-spacing: 0.04em;  //詰まりすぎた文字間広げる
+}
+//モバイル版の設定
+//メインビジュアルで設定していたたかさ、100ｖｈ-60ｐｘの上書き
+@include mq {
+  height: 100vh;
+
+  &__new-issue {
+    width: auto;
+    height: 85vh;
+  }
+
+  &__title-date-number {
+    font-size: 1.3rem;
+  }
+
+  &__title-en,
+  &__title-ja {
+    // font-size: 3rem;
+    font-size: clamp(2.5rem, 4vw, 3.4rem);  //真ん中は画面サイズの40％分、画面の幅に応じて変わる.画面大きくなりすぎないようにクランプ聞かせる。
+}
+}
+}
+
+// バックナンバー
+.backnumbers {
+
+  &__heading {
+    background-color: #f8f8f8;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: .9rem;
+    padding: 2rem;
+  }
 }
