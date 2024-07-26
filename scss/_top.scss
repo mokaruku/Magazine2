@@ -364,7 +364,7 @@ h2>* {   //ｈ２の子要素で何のタグでもという意味　ここで背
     color: var(--color-primary);
     transition: opacity .3s; 
 
-    &:hover {
+    &:hover {    //カーソル乗せたときのアクション
       opacity: .7;
     }
 }
