@@ -303,7 +303,8 @@ h2>* {   //ｈ２の子要素で何のタグでもという意味　ここで背
 // 発行日＋No.
 &__title-date-number {
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 500;//バリアブルフォントだから細かいフォント受け付ける
+
 }
 
 &__title-en,
@@ -319,7 +320,7 @@ h2>* {   //ｈ２の子要素で何のタグでもという意味　ここで背
 //モバイル版の設定
 //メインビジュアルで設定していたたかさ、100ｖｈ-60ｐｘの上書き
 @include mq {
-  height: 100vh;
+  height: 100vh; //ほんのサイズ
 
   &__new-issue {
     width: auto;
@@ -343,9 +344,62 @@ h2>* {   //ｈ２の子要素で何のタグでもという意味　ここで背
 
   &__heading {
     background-color: #f8f8f8;
-    font-weight: 400;
+    font-weight: 400;  //400は普通のウェイト
     text-transform: uppercase;
     font-size: .9rem;
     padding: 2rem;
+
+    &::first-line {  //first-lineは使えるのがインライン的な要素だけ
+      font-size: 1.2rem;
+  }
+}
+
+&__list {
+  list-style: none;
+
+  a {
+    display: block;
+    padding: 3rem 1.5rem;
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: opacity .3s; 
+
+    &:hover {
+      opacity: .7;
+    }
+}
+}
+
+&__cover {
+  width: 65%;  //親ボックスに対する幅
+  max-width: 350px;
+  display: block;
+  margin: 0 auto 3rem;  //センタリング
+  box-shadow:
+    2px 2px 5px 0 rgba(0 0 0 /.2),
+    0 0 20px 0 rgba(0 0 0 / .2);
+}
+
+&__date,
+  &__number {
+    font-weight: 300;
+    margin-bottom: .5rem;
+  }
+
+  &__title {
+    font-size: 1.4rem;
+  }
+
+  @include mq {
+    &__heading {
+      &::first-line {
+        font-size: 1.8rem;
+      }
+    }
+
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);  //2カラムにして割合は50％50％
+    }
   }
 }

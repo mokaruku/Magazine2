@@ -285,3 +285,42 @@ body.loaded .mv__title-date-number > span, body.loaded .mv__title-en > span, bod
   font-size: 0.9rem;
   padding: 2rem;
 }
+.backnumbers__heading::first-line {
+  font-size: 1.2rem;
+}
+.backnumbers__list {
+  list-style: none;
+}
+.backnumbers__list a {
+  display: block;
+  padding: 3rem 1.5rem;
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: opacity 0.3s;
+}
+.backnumbers__list a:hover {
+  opacity: 0.7;
+}
+.backnumbers__cover {
+  width: 65%;
+  max-width: 350px;
+  display: block;
+  margin: 0 auto 3rem;
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.2);
+}
+.backnumbers__date, .backnumbers__number {
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+.backnumbers__title {
+  font-size: 1.4rem;
+}
+@media screen and (min-width: 768px) {
+  .backnumbers__heading::first-line {
+    font-size: 1.8rem;
+  }
+  .backnumbers__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
